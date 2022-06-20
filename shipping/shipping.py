@@ -33,13 +33,41 @@ class ShippingContainer:
 
 class RefrigratedShippingContainer(ShippingContainer):
 
-    MAX_CELSIOUS = 4
+    MAX_celsius = 4
 
-    def __init__(self, owner_code, content, *, celsious, **kwargs):
+    def __init__(self, owner_code, content, *, celsius, **kwargs):
         super().__init__(owner_code, content, **kwargs)
-        if celsious > RefrigratedShippingContainer.MAX_CELSIOUS:
+        self.celsius = celsius
+
+    @property
+    def celsius(self):
+        return self._celsius
+
+    @celsius.setter
+    def celsius(self, value):
+        if value > RefrigratedShippingContainer.MAX_celsius:
             raise ValueError("Temperature too hot")
-        self.celsious = celsious
+        self._celsius = value
+    
+
+    @property
+    def fahrenheite(self):
+        return RefrigratedShippingContainer._c_to_f(self.celsius)
+
+    @fahrenheite.setter
+    def fahrenheite(self, value):
+        self.celsius = RefrigratedShippingContainer._f_to_c(value)
+
+
+    @staticmethod
+    def _c_to_f(celsius):
+        return celsius * 9/5 + 32
+
+
+    @staticmethod
+    def _f_to_c(fahrenheite):
+        return (fahrenheite - 32) * 5/9
+
 
     @staticmethod
     def _create_bic_code(owner_code, serial):
@@ -51,7 +79,9 @@ class RefrigratedShippingContainer(ShippingContainer):
 
 
 if __name__ == '__main__':
-    c = RefrigratedShippingContainer.create_empty('MHE', celsious = 3)
-    # c = RefrigratedShippingContainer.create_with_items('MHE', ['Onions'], celsious = 2)
+    c = RefrigratedShippingContainer.create_empty('MHE', celsius = 3)
+    # c = RefrigratedShippingContainer.create_with_items('MHE', ['Onions'], celsius = 2)
+    c.fahrenheite = 32
     print(c.bic)
-    print(c.celsious)
+    print(c.celsius)
+    print(c.fahrenheite)
