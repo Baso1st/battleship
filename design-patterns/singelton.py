@@ -1,14 +1,17 @@
 
 from abc import abstractstaticmethod
-from asyncio.log import logger
+import threading
 
 
 class Logger(object):
     _instance = None
+    _lock = threading.local()
 
     def __new__(cls):
         if not cls._instance:
-            cls._instance = super(Logger, cls).__new__(cls)
+            with cls._lock:
+                if not cls._instance:
+                    cls._instance = super(Logger, cls).__new__(cls)
         
         return cls._instance
 
