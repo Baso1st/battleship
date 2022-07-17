@@ -2,7 +2,7 @@ from abc import ABC
 
 class Direction:
     Vertical = 1
-    HORIZONTAL = 2
+    Horizontal = 2
 
 class ShipPlacement:
     def __init__(self, i, j, direction):
@@ -85,16 +85,16 @@ if __name__== '__main__':
 
     print("Seting up player 1 ships")
 
-    game.place_ship(1, AirCraftCarrier("USS Thunder"), ShipPlacement(0, 0, Direction.HORIZONTAL))
-    game.place_ship(1, Destroyer("USS Navy Pride"), ShipPlacement(1, 0, Direction.HORIZONTAL))
-    game.place_ship(1, Destroyer("USS Navigator"), ShipPlacement(2, 0, Direction.HORIZONTAL))
-    game.place_ship(1, SmallBoat("USS boat1"), ShipPlacement(3, 0, Direction.HORIZONTAL))
-    game.place_ship(1, SmallBoat("USS boat2"), ShipPlacement(4, 0, Direction.HORIZONTAL))
-    game.place_ship(1, SmallBoat("USS boat3"), ShipPlacement(5, 0, Direction.HORIZONTAL))
-    game.place_ship(1, SmallBoat("USS boat4"), ShipPlacement(6, 0, Direction.HORIZONTAL))
-    game.place_ship(1, Submarine("USS Silent Hunter"), ShipPlacement(7, 0, Direction.HORIZONTAL))
-    game.place_ship(1, Submarine("USS Whisperer"), ShipPlacement(8, 0, Direction.HORIZONTAL))
-    game.place_ship(1, Submarine("USS Sea snake"), ShipPlacement(9, 0, Direction.HORIZONTAL))
+    game.place_ship(1, AirCraftCarrier("USS Thunder"), ShipPlacement(0, 0, Direction.Horizontal))
+    game.place_ship(1, Destroyer("USS Navy Pride"), ShipPlacement(1, 0, Direction.Horizontal))
+    game.place_ship(1, Destroyer("USS Navigator"), ShipPlacement(2, 0, Direction.Horizontal))
+    game.place_ship(1, SmallBoat("USS boat1"), ShipPlacement(3, 0, Direction.Horizontal))
+    game.place_ship(1, SmallBoat("USS boat2"), ShipPlacement(4, 0, Direction.Horizontal))
+    game.place_ship(1, SmallBoat("USS boat3"), ShipPlacement(5, 0, Direction.Horizontal))
+    game.place_ship(1, SmallBoat("USS boat4"), ShipPlacement(6, 0, Direction.Horizontal))
+    game.place_ship(1, Submarine("USS Silent Hunter"), ShipPlacement(7, 0, Direction.Horizontal))
+    game.place_ship(1, Submarine("USS Whisperer"), ShipPlacement(8, 0, Direction.Horizontal))
+    game.place_ship(1, Submarine("USS Sea snake"), ShipPlacement(9, 0, Direction.Horizontal))
 
     print("Seting up player 2 ships")
 
