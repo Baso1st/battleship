@@ -28,16 +28,16 @@ class IShipPlacementStrategy(ABC):
 class AutoPlacement(IShipPlacementStrategy):
     def place_ships(self):
         board = {}
-        available_cells = set()
         for i in range(self._row_count):
             for j in range(self._col_count):
-                available_cells.add((i, j))
+                board[(i, j)] = None
+        taken = {}
         for ship in self._ships:
-            coords = self._get_coords(ship.size, available_cells)
+            coords = self._get_coords(ship.size, board)
             for coord in coords: 
-                board[coord] = ship
-                available_cells.remove(coord)
-        return board
+                taken[coord] = ship
+                board.pop(coord)
+        return (board | taken)
 
 
     def _get_coords(self, size, available_cells):

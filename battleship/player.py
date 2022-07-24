@@ -21,16 +21,22 @@ class Player(ABC):
 
 
     def has_ships(self):
-        return len(self._board) > 0
+        #ToDo: This could be changed to track the number of ships through a class variable in a O(1) instead of O(n) like below
+        for cell, ship in self._board.items():
+            if ship:
+                return True
+        return False
     
     def take_hit(self, coord):
-        if coord in self._board:
-            ship = self._board[coord]
+        ship = self._board.pop(coord)
+        if ship:
             hit_report = ship.take_hit()
-            self._board.pop(coord)
             return HitEffect(True, hit_report)
         else:
             return HitEffect(False, 'Missed!!!')
+    
+    def get_unhit_cells(self):
+        return list(self._board.keys())
 
 class Human(Player):
 
