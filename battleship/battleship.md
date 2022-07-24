@@ -1,3 +1,5 @@
+# To Start The Game Run gameloop.py
+
 
 ### Make the game extendable/flexable
 - Play against the computer
