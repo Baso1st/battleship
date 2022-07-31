@@ -7,7 +7,7 @@
 
 
 ### Game features. (checked means done ;) 
-- <input type="checkbox" checked> [(x)]Play against the computer.
+- <input type="checkbox" checked> [x] Play against the computer.
 - <input type="checkbox" checked> Support more than two players.
 - <input type="checkbox"> Different types of boards (square, rectangle, circle, etc...).
 - <input type="checkbox"> Different winning strategies (Elimination, Time limit, specific score, Biggest ships destroyed).
