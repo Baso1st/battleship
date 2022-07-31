@@ -1,7 +1,12 @@
-# To Start The Game Run gameloop.py
+# Hello, and welcome to Battleship
+
+## To Start the game run gameloop.py
+**Please read the following before you run the game:**
+
+    The game right now is set to auto mode. So once you start, it will make random gusses and play automatically against the computer, but you can change that in the code.
 
 
-### Make the game extendable/flexable
+### Game features. (checked means done ;) 
 - <input type="checkbox" checked> Play against the computer.
 - <input type="checkbox" checked> Support more than two players.
 - <input type="checkbox"> Different types of boards (square, rectangle, circle, etc...).
