@@ -58,14 +58,16 @@ class AutoPlacement(IShipPlacementStrategy):
                             coords.add((i, k))
                         else:
                             break
-                    return coords
+                    if len(coords) == size:
+                        return coords
                 else:
                     for k in range(i, i + size):
-                        if k in good_cells:
+                        if (k, j) in good_cells:
                             coords.add((k, j))
                         else:
                             break
-                    return coords
+                    if len(coords) == size:
+                        return coords
             good_cells.remove((i, j))
         
         raise Exception("Ship cannot be placed!!!")

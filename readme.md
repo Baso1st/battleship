@@ -9,9 +9,11 @@
 ### Game features. (checked means done ;) 
 - [x] Play against the computer.
 - [x] Support more than two players.
-- [ ] Different types of boards (square, rectangle, circle, etc...).
-- [ ] Different winning strategies (Elimination, Time limit, specific score, Biggest ships destroyed).
+- [x] Different winning strategies (Annihilation, Score, TimeLimit).
+- [ ] Change the way the winning strategy works to use observable pattern, to get notified when a player is hit or destroyed.
 - [ ] Need to add a game_config class to pass to the game class. It should contain, row_count, col_count, player_count, etc...
 - [ ] Allow players to choose a Placement strategy(Manual, Auto).
+- [ ] Different types of boards (square, rectangle, circle, etc...).
+- [ ] Get rid of all the ToDo comments. 
 
 --------------------
