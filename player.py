@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from placement import IShipPlacementStrategy
+from placement import CellState, Cell, IShipPlacementStrategy
 
 
 class HitEffect:
@@ -36,22 +36,33 @@ class Player(ABC):
 
     def has_ships(self):
         #ToDo: This could be changed to track the number of ships through a class variable in a O(1) instead of O(n) like below
-        for ship in self._board.values():
-            if ship:
-                return True
+        for i in range(len(self._board)):
+            for j in range(len(self._board[0])):
+                if self._board[i][j].state == CellState.Has_Ship:
+                    return True
         return False
     
     def take_hit(self, coord):
-        ship = self._board.pop(coord)
-        if ship:
+        r, c = coord
+        cell = self._board[r][c]
+        if cell.state == CellState.Has_Ship:
+            ship = cell.ship
             hit_report = ship.take_hit()
             self._hits += 1
+            cell.state = CellState.Hit
             return HitEffect(True, hit_report)
         else:
+            cell.state = CellState.Miss
             return HitEffect(False, 'Missed!!!')
     
     def get_unhit_cells(self):
-        return list(self._board.keys())
+        unhit_cells = []
+        unhit_states = (CellState.Empty, CellState.Has_Ship)
+        for i in range(len(self._board)):
+            for j in range(len(self._board[0])):
+                if self._board[i][j].state in unhit_states:
+                    unhit_cells.append((i, j))
+        return unhit_cells
 
 class Human(Player):
 

@@ -4,6 +4,17 @@ from typing import List
 from ship import Ship
 
 
+class CellState:
+    Empty = 0
+    Has_Ship = 1
+    Miss = 2
+    Hit = 3
+
+class Cell:
+    def __init__(self) -> None:
+        self.state = CellState.Empty
+        self.ship = None
+
 class Direction:
     Vertical = 1
     Horizontal = 2
@@ -27,25 +38,27 @@ class IShipPlacementStrategy(ABC):
 
 class AutoPlacement(IShipPlacementStrategy):
     def place_ships(self):
-        board = {}
-        for i in range(self._row_count):
-            for j in range(self._col_count):
-                board[(i, j)] = None
-        taken = {}
+        board = [[Cell() for j in range(self._col_count)] for i in range(self._row_count)]
+
         for ship in self._ships:
             coords = self._get_coords(ship.size, board)
-            for coord in coords: 
-                taken[coord] = ship
-                board.pop(coord)
-        return (board | taken)
+            for r, c in coords: 
+                board[r][c].state = CellState.Has_Ship
+                board[r][c].ship = ship
+        return board
 
 
-    def _get_coords(self, size, available_cells):
+    def _get_coords(self, size, board):
         """
         This method returns a randome location to place the ship. 
         It choses a random cell and direction, then checks if the ship size fits there, if not it tries with a different cell. 
         """
-        good_cells = set(available_cells)
+        good_cells = set()
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j].state == CellState.Empty:
+                    good_cells.add((i, j))
+
         while len(good_cells) > size:
             i, j = random.choice(tuple(good_cells))
             dir_list = [Direction.Horizontal, Direction.Vertical]
@@ -72,24 +85,17 @@ class AutoPlacement(IShipPlacementStrategy):
         
         raise Exception("Ship cannot be placed!!!")
 
-
 # class ManualPlacement(IShipPlacementStrategy):
 
-#     def place_ships(self, ships: List[Ship], board):
-#         row_count = len(board)
-#         col_count = board[0]
-#         available_rows = [i for i in range(row_count)]
-#         available_cols = [i for i in range(len(col_count))]
-#         for ship in ships:
-#             coords = self._get_coords(ship.size, available_rows, available_cols)
-#             for coord in coords: 
-#                 board[coord] = ship
+#     def place_ships(self):
+#         board = {}
+#         for i in range(self._row_count):
+#             for j in range(self._col_count):
+#                 board[(i, j)] = None
+        
+#         for ship in self._ships:
+                
+            
+#         return board
+            
 
-#     def _get_coords(self, size, shipDirection):
-#         coords = []
-#         for idx in range(size):
-#             if shipDirection.direction == Direction.Vertical:
-#                 coords.append((shipDirection.i + idx, shipDirection.j))
-#             else:
-#                 coords.append((shipDirection.i, shipDirection.j + idx))
-#         return coords

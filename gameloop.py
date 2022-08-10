@@ -33,6 +33,10 @@ if __name__== '__main__':
     for i in range(player_count):
         name = input(f"Player {i+1} please enter your name:\n")
         ships = get_ships(name)
+        # placement_choice = int(input("How would you like to place your ships?\n"
+        #                                 "1-Auto\n"
+        #                                 "2-Manual\n"))
+        # placement = AutoPlacement(ships, row_count, col_count) if placement_choice == 1 else 1
         human = Human(name, AutoPlacement(ships, row_count, col_count))
         human.place_ships()
         players.append(human)
@@ -66,7 +70,8 @@ if __name__== '__main__':
         # defensive_number = int(input(f"{offensive.name} who would you like to attack?"))
         # defensive = players[defensive_number]
         defensive = random.choice([x for x in game._players if x != offensive])
-        i, j = random.choice(defensive.get_unhit_cells()) # In a real situation a human will make their own choices.
+        avail_cells = defensive.get_unhit_cells()
+        i, j = random.choice(avail_cells) # In a real situation a human will make their own choices.
         # (i, j) = [int(x) for x in input(f"{offensive.name} please enter your x y coordinates?").split()]
 
         hit_report = game.fire(offensive, defensive, (i, j))
