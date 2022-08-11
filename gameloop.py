@@ -38,13 +38,11 @@ if __name__== '__main__':
         #                                 "2-Manual\n"))
         # placement = AutoPlacement(ships, row_count, col_count) if placement_choice == 1 else 1
         human = Human(name, AutoPlacement(ships, row_count, col_count))
-        human.place_ships()
         players.append(human)
     if player_count == 1:
         name = 'Computer'
         ships = get_ships(name)
         ai = AI(name, AutoPlacement(ships, row_count, col_count))
-        ai.place_ships()
         players.append(ai)
 
 

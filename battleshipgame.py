@@ -7,6 +7,8 @@ class BattleShipGame:
         self._winner = None
         self._players = list(players)
         self._win_strategy = win_strategy
+        for player in players:
+            player.place_ships()
 
     def has_winner(self) -> bool:
         self._winner = self._win_strategy.get_winner(self._players)
