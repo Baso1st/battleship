@@ -10,7 +10,7 @@ class HitEffect:
 
 class Player(ABC):
     def __init__(self, name, shipPlacementStrategy: IShipPlacementStrategy) -> None:
-        self._board = {}
+        self._board = []
         self._shipPlacementStrategy = shipPlacementStrategy
         self.name = name
         self._score = 0

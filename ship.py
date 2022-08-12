@@ -13,12 +13,14 @@ class Ship(ABC):
         self._size -= 1
         return self.get_hit_report()
 
+    def __str__(self):
+        return f"{type(self).__name__} {self.name}"
+
     def get_hit_report(self):
-        message = f"{type(self).__name__} {self.name} "
         if self._size > 0:
-            return message + f"is criticaly hit. Remaining health: {self._size}"
+            return str(self) + f" is criticaly hit. Remaining health: {self._size}"
         else:
-            return message + f"has been destroyed"
+            return str(self) + f" has been destroyed"
 
 class AirCraftCarrier(Ship):
     def __init__(self, name):

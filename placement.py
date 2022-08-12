@@ -85,17 +85,55 @@ class AutoPlacement(IShipPlacementStrategy):
         
         raise Exception("Ship cannot be placed!!!")
 
-# class ManualPlacement(IShipPlacementStrategy):
+class ManualPlacement(IShipPlacementStrategy):
+    def place_ships(self):
+        board = [[Cell() for j in range(self._col_count)] for i in range(self._row_count)]
 
-#     def place_ships(self):
-#         board = {}
-#         for i in range(self._row_count):
-#             for j in range(self._col_count):
-#                 board[(i, j)] = None
+        stack = list(self._ships)
+        while stack:
+            ship = stack.pop()
+            self._print_board(board)
+            coords = input(f"Where would you like to place {ship} of size {ship.size}?\n"
+                         f"Start Cell (ex: 0, 3): ")
+            r, c = [int(i) for i in coords.split(',')]
+            direction = int(input(f"Direction? 1 for Vertical and 2 for Horizontal? "))
+            if self._is_valid_placement(r, c, direction, board, ship.size):
+                self._place_ship(r, c, direction, board, ship)
+            else:
+                print("Can't place the ship in that location and direction. Please try again")
+                stack.append(ship)
+
+        return board
+
+    def _print_board(self, board):
+        for row in board:
+            cell_states = [cell.state for cell in row] #ToDo: Add some colors to make it clear what's what
+            print(cell_states)
+    
+    def _is_valid_placement(self, r, c, direction, board, ship_size):
+        if direction == Direction.Horizontal:
+            for i in range(c, c + ship_size):
+                if board[r][i].state != CellState.Empty:
+                    return False
+        elif direction == Direction.Vertical:
+            for i in range(r, r + ship_size):
+                if board[i][c].state != CellState.Empty:
+                    return False
+        else:
+            return False
         
-#         for ship in self._ships:
-                
-            
-#         return board
-            
+        return True
+
+    def _place_ship(self, r, c, direction, board, ship):
+        if direction == Direction.Horizontal:
+            for i in range(c, c + ship.size):
+                board[r][i].state = CellState.Has_Ship
+                board[r][i].ship = ship
+        elif direction == Direction.Vertical:
+            for i in range(r, r + ship.size):
+                board[i][c].state = CellState.Has_Ship
+                board[i][c].ship = ship
+        else:
+            raise ValueError("Incorrect Direction")
+
 

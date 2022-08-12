@@ -33,11 +33,11 @@ if __name__== '__main__':
     for i in range(player_count):
         name = input(f"Player {i+1} please enter your name:\n")
         ships = get_ships(name)
-        # placement_choice = int(input("How would you like to place your ships?\n"
-        #                                 "1-Auto\n"
-        #                                 "2-Manual\n"))
-        # placement = AutoPlacement(ships, row_count, col_count) if placement_choice == 1 else 1
-        human = Human(name, AutoPlacement(ships, row_count, col_count))
+        placement_choice = int(input("How would you like to place your ships?\n"
+                                        "1-Auto\n"
+                                        "2-Manual\n"))
+        placement = AutoPlacement(ships, row_count, col_count) if placement_choice == 1 else ManualPlacement(ships, row_count, col_count)
+        human = Human(name, placement)
         players.append(human)
     if player_count == 1:
         name = 'Computer'
