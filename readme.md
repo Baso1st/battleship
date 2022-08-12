@@ -12,7 +12,8 @@
 - [x] Different winning strategies (Annihilation, Score, TimeLimit).
 - [X] Change the board to be a matrix instead of a hash_table.
 - [ ] Add automated Testing
-- [ ] Allow players to choose a Placement strategy(Manual, Auto).
+- [X] Allow players to choose a Placement strategy(Manual, Auto).
+- [X] Implement the Manual Placement Strategy
 - [ ] Dockerize the game
 - [ ] Change the way the winning strategy works to use observable pattern, to get notified when a player is hit or destroyed.
 - [ ] Need to add a game_config class to pass to the game class. It should contain, row_count, col_count, player_count, etc...
