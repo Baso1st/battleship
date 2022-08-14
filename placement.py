@@ -33,7 +33,7 @@ class IShipPlacementStrategy(ABC):
         self._col_count = col_count
 
     @abstractmethod
-    def place_ships(self) -> dict:
+    def place_ships(self):
         pass
 
 class AutoPlacement(IShipPlacementStrategy):

@@ -16,11 +16,6 @@ class Player(ABC):
         self._score = 0
         self._hits = 0
         
-        
-    @abstractmethod
-    def place_ships(self):
-        pass
-
     @property
     def score(self):
         return self._score
@@ -33,6 +28,9 @@ class Player(ABC):
     def hits(self):
         return self._hits
 
+
+    def place_ships(self):
+        self._board = self._shipPlacementStrategy.place_ships()
 
     def has_ships(self):
         #ToDo: This could be changed to track the number of ships through a class variable in a O(1) instead of O(n) like below
@@ -65,11 +63,7 @@ class Player(ABC):
         return unhit_cells
 
 class Human(Player):
-
-    def place_ships(self):
-        self._board = self._shipPlacementStrategy.place_ships()
+    pass
                 
 class AI(Player):
-
-    def place_ships(self):
-        self._board = self._shipPlacementStrategy.place_ships()
+    pass
