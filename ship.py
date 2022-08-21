@@ -1,5 +1,6 @@
 from abc import ABC
 
+
 class Ship(ABC):
     def __init__(self, name, size):
         self.name = name

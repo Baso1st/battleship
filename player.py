@@ -15,6 +15,7 @@ class Player(ABC):
         self.name = name
         self._score = 0
         self._hits = 0
+        self.num_ships = 4
         
     @property
     def score(self):
@@ -33,11 +34,8 @@ class Player(ABC):
         self._board = self._shipPlacementStrategy.place_ships()
 
     def has_ships(self):
-        #ToDo: This could be changed to track the number of ships through a class variable in a O(1) instead of O(n) like below
-        for i in range(len(self._board)):
-            for j in range(len(self._board[0])):
-                if self._board[i][j].state == CellState.Has_Ship:
-                    return True
+        if self.num_ships > 0:
+            return True
         return False
     
     def take_hit(self, coord):
@@ -48,6 +46,8 @@ class Player(ABC):
             hit_report = ship.take_hit()
             self._hits += 1
             cell.state = CellState.Hit
+            if "has been destroyed" in hit_report:
+                self.num_ships -= 1
             return HitEffect(True, hit_report)
         else:
             cell.state = CellState.Miss
